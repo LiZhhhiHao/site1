@@ -1,0 +1,136 @@
+VNC: 一定要填用户名为viewonly
+username: viewonly
+password: 123456
+
+代码管理:
+多人合作:
+git(在线，离线版本管理)  svn(在线)
+版本管理:
+banner.js
+  1207  上下轮播  1.0
+  1209  左右轮播  2.0
+
+git:  Linux 源码.
+Git是一个版本管理控制系统（缩写VCS  version control system）
+
+工作流程:
+1.在文件夹里面创建一个文件.  是工作区.
+2.git add  a.js  把 a.js加入了暂存区.
+3.git commit -m '创世文件'  把暂存
+
+区的文件 加入版本库.
+
+工作区 -> 暂存区 -> 版本库
+
+git 使用:
+右键打开命令行: git bash.    (bash 命令行模式)
+1.配置用户名 , 邮件.
+git config --list  查看配置列表
+git config --global user.name 用户名 ### 配置用户名
+  例如: git config --global user.name kklp2020
+git config --global user.email 邮箱.   ### 配置邮箱
+  例如: git config --global user.email 657052495@qq.com
+注意是:  name 后面最好和服务器对应.  email 最好也要和后面注册github的注册邮件地址对应.
+问题: 1).安装(下一步)
+      2).全局默认的用户名 和 邮件地址. (默认配置)
+操作系统: 1).显示文件扩展名  2). 显示隐藏项目  3).操作系统的管理员(administrator window系统的超级管理员)
+window系统的用户配置:
+          C:\users
+          C:\User
+          C:\用户
+修改全局用户名 和 邮箱地址:  C:\用户\登录用户\.gitconfig  默认的全局配置;
+2.代码版本管理
+1).git init  初始化git空的仓库 (文件路径后面有个默认的分支 (master) 主分支 )
+2).git status 查看版本库 文件 状态.
+        On branch master  ### 在master分支
+        No commits yet    ### 还没有提交代码 commit 提交
+        Untracked files:  ### 未追踪文件.
+          (use "git add <file>..." to include in what will be committed) ## 提示
+                index.html  ### 未追踪文件名称.
+        nothing added to commit but untracked files present (use "git add" to track)
+3).git add 文件名(index.html)  把index.html 纳入版本管理 同时加入暂存区.
+4).git commit -m '提交备注..第一次提交...'   把暂存区的文件 提交到版本库
+  git status
+  On branch master ### 在master分支
+  nothing to commit, working tree clean ### 没有文件可以提交,你工作空间是干净.
+  --------------------------------------------------------
+  *** Please tell me who you are.  #### 邮箱 和 用户配置不正确.
+  Run
+    git config --global user.email "you@example.com"
+    git config --global user.name "Your Name"
+  to set your account's default identity.
+  Omit --global to set the identity only in this repository.
+  ---------------------------------------------------------
+命令: 一条命令 就是  一行， 命令敲完之后，执行 就 enter 键
+5).git log 查看提交记录
+   添加一个文件 git add  提交 git commit   查看记录 git log
+6).git checkout 文件名   ( 拿暂存区的代码 覆盖 工作区的的文件)
+    修改一个文件. git add 文件名; 添加到暂存区.
+    再次修改文件. 期望 暂存区 覆盖工作区.  git checkout 文件夹名
+7).git rm --cached 文件名; 将文件从暂存区中删除
+8).git reset --hard commitID 从版本库里面恢复文件. 把暂存区 和 工作目录都覆盖
+   commitID 提交ID记录  用git log查看ID
+
+总结:
+  1. 设置邮件 和 用户名  git config --global user.name或 user.email
+  2. 初始化版本 git init  把当前文件夹纳入版本管理
+  3.新建文件 , 用git add 纳入git 暂存区, 用 git commit 提交到版本库
+  4.查看版本库提交记录  git log
+  5.git checkout 恢复到 暂存区
+  6.git rm --cached 文件  删除暂存区的文件
+  7.git reset --hard commitID 恢复到 版本库某个ID的位置
+
+新建文件夹 mall_js  js商城项目
+1.git init 初始化
+2.新建一个 index.html 网页文件 写代码..  [工作区]
+3.加入暂存区  git add index.html
+4.加入版本仓库 git commit -m '备注:第一次提交代码'
+5.git status 查看状态  git log 提交日志 随时可以用 
+撤销(回退):
+  1.暂存区 覆盖 工作区  git checkout 文件名
+  2.删除暂存区. git rm --cached 文件名  git rm --cached index.html 删除暂存区 ，本地的没有删除.
+    注意: 如果删除了暂存区的文件，并且你把它提交了. 仓库没有，但是本地的一直存在.
+  3.回退到历史记录的某个地方  git reset --hard commitID
+删除:
+  1.git rm 文件名  从版本库 里面删除一个文件. 
+  2.git commit -m '删除文件'  提交删除..
+分支(branch)管理:
+    项目开发阶段:
+    项目开发的时候有不同阶段，不同的阶段就有不同的代码.
+    1.线上版本(不能有bug) (技术经理 或 技术总监. 运维.)
+    2.测试版本(bug少)     (测试管理)
+    3.开发版本(bug) 功能版本(bug)  程序员 开发工程师管理
+分支:
+    master 主分支
+    release 测试版本
+    develop 开发版本
+    feature 功能版本
+    新建一个项目 一开始默认有一个master. 开始其他分支是master 分支出来.
+git branch  查看分支列表
+git branch release 创建一个分支 release是分支名称
+git checkout release 切换分支(切换到 release分支)
+    练习----- 创建 feature 分支 并切换到 feature
+git merge feature  合并分支.
+git branch -d 分支名称  删除分支 (-D 强制删除)
+
+存储临时改变:
+git stash 临时存储(把当前的改变的功能临时存储起来，得到一个干净环境)
+git stash pop 恢复临时存储的改动(如果有冲突 ，合并冲突.)  一般来说 有一次 stash 就有一次 stash pop
+
+git版本控制服务器:
+    公共的git服务器:  github.com   码云 gitee.com
+    Repository  仓库
+    1.添加远程仓库地址
+    github:
+    git remote add origin https://github.com/kklp2020/gz2068.git
+    gitee:
+    git remote add origin https://gitee.com/kklp2020/gz2068_1.git
+
+    git remote add 远程仓库别名 远程仓库地址.   ## 添加远程仓库地址 别名一般就叫 origin
+
+    2.推送代码到远程仓库
+    git push 远程仓库地址 分支名称 #  远程仓库地址有一个别名 就用别名代表远程仓库地址
+    git push origin master
+
+   LiZhhhiHao
+   5913104c153a32a3eda9fdccdfcff4209da5aa0c
